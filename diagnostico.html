@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico de Performance | Treinamento & Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .quiz-hero {
+            padding: 180px 0 40px;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .quiz-hero span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .quiz-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .quiz-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .quiz-section {
+            padding: 0 0 100px;
+            background-color: var(--white);
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.02);
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background-color: #f1f5f9;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            width: 20%;
+            height: 100%;
+            background-color: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .question-block {
+            display: none;
+        }
+
+        .question-block.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .question-block h3 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            background-color: #f8fafc;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option-item:hover {
+            border-color: var(--gold);
+            background-color: #fff;
+            transform: translateX(5px);
+        }
+
+        .option-item.selected {
+            border-color: var(--primary-blue);
+            background-color: #f0f4f8;
+            box-shadow: inset 4px 0 0 var(--gold);
+        }
+
+        .option-radio {
+            margin-right: 15px;
+            accent-color: var(--gold);
+            width: 18px;
+            height: 18px;
+        }
+
+        .option-text {
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        .quiz-navigation-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn-quiz {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-quiz-prev {
+            background-color: transparent;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+        }
+
+        .btn-quiz-prev:hover {
+            background-color: #f1f5f9;
+            color: var(--primary-blue);
+        }
+
+        .btn-quiz-next {
+            background-color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            color: #fff;
+        }
+
+        .btn-quiz-next:hover {
+            background-color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .result-block {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .result-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .result-block h2 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .result-block .service-title {
+            font-size: 1.4rem;
+            color: var(--gold-light);
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            display: inline-block;
+            padding: 10px 20px;
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+        }
+
+        .result-block .service-description {
+            color: #475569;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        .btn-result-action {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 15px 35px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .btn-result-action:hover {
+            background-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(10, 25, 47, 0.1);
+        }
+
+        .footer-social-block {
+            margin-top: 15px;
+        }
+
+        .footer-social-flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            color: #aaa;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 24px;
+            height: 24px;
+            box-sizing: border-box;
+        }
+
+        .footer-social-link svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+            display: block;
+        }
+
+        .footer-social-link:hover {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 0;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: #0f172a;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px 40px;
+                gap: 25px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                transition: right 0.4s ease-in-out;
+                z-index: 1000;
+                list-style: none;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                color: #ffffff !important;
+            }
+
+            .btn-cta-nav {
+                display: none;
+            }
+            
+            .nav-links::after {
+                content: 'Solicitar Consultoria';
+                display: block;
+                width: 100%;
+                text-align: center;
+                background-color: #fbc02d;
+                color: #0f172a;
+                padding: 14px;
+                border-radius: 4px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                cursor: pointer;
+                margin-top: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <nav class="navbar" style="background: var(--primary-blue); border-bottom: 1px solid #1e293b; position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: #ffffff;">Treinamento & Performance</a>
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="servicos.html" class="nav-item" style="color: var(--white);">Serviços</a></li>
+            <li><a href="sobre.html" class="nav-item" style="color: var(--white);">Nossa História</a></li>
+            <li><a href="diagnostico.html" class="nav-item" style="color: var(--white); font-weight: 700;">Diagnóstico</a></li>
+            <li><a href="contato.html" class="nav-item" style="color: var(--white);">Contato</a></li>
+        </ul>
+        
+        <button class="btn-cta-nav" style="background: transparent; border: 1px solid white; color: white;" onclick="window.location.href='contato.html'">Solicitar Consultoria</button>
+        
+        <button class="menu-toggle" id="mobileMenuBtn" aria-label="Abrir menu de navegação">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <header class="quiz-hero">
+        <div class="container">
+            <span>Mapeamento Corporativo Inteligente</span>
+            <h1>Descubra a Solução Ideal Para Sua Empresa</h1>
+            <p>Responda a 5 perguntas rápidas baseadas no cenário operacional atual do seu negócio e receba uma recomendação analítica do treinamento ou consultoria que trará o maior retorno estratégico.</p>
+        </div>
+    </header>
+
+    <section class="quiz-section">
+        <div class="container">
+            <div class="quiz-container reveal active">
+                
+                <div class="progress-container" id="quizProgress">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressStepText">Pergunta 1 de 5</span>
+                        <span id="progressPercent">20% Concluído</span>
+                    </div>
+                </div>
+
+                <div id="questionsForm">
+                    
+                    <div class="question-block active" data-step="1">
+                        <h3>1. Qual é o principal desafio ou gargalo que sua organização enfrenta de forma mais urgente hoje?</h3>
+                        <div class="options-list">
+                            <div class="option-item" onclick="selectOption(this, 1, 'comercial')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Baixo volume de vendas, dificuldades em fechar negócios ou atingir metas comerciais.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 1, 'lideranca')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Líderes centralizadores, falhas na gestão de pessoas ou dificuldades em tomar decisões estratégicas.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 1, 'performance')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Processos engessados, lentidão operacional, baixa produtividade ou desalinhamento de equipes.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 1, 'palestras')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Desmotivação generalizada, falta de energia da equipe ou enfraquecimento da cultura interna.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 1, 'coaching')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Necessidade de desenvolver competências muito específicas em executivos ou colaboradores chave.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 1, 'personalizado')">
+                                <input type="radio" name="q1" class="option-radio">
+                                <span class="option-text">Temos múltiplos desafios complexos misturados que dependem muito do nosso nicho específico de mercado.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-step="2">
+                        <h3>2. Ao observar o comportamento diário das suas equipes, qual característica está mais em falta?</h3>
+                        <div class="options-list">
+                            <div class="option-item" onclick="selectOption(this, 2, 'comercial')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Técnicas avançadas de negociação, prospecção agressiva ou foco em conversão de clientes.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 2, 'lideranca')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Comunicação clara, inteligência emocional e habilidade de delegar funções de forma inspiradora.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 2, 'performance')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Organização de rotinas, cumprimento ágil de prazos e eliminação de desperdícios funcionais.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 2, 'palestras')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Trabalho em equipe, senso de pertencimento e orgulho de carregar os valores da empresa.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 2, 'coaching')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Constância, definição de metas individuais claras e foco em autodesenvolvimento profissional.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 2, 'personalizado')">
+                                <input type="radio" name="q2" class="option-radio">
+                                <span class="option-text">Nossas frentes operacionais variam muito; cada filial ou departamento opera sob regras e perfis muito distintos.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-step="3">
+                        <h3>3. Qual é o formato ideal de entrega e duração que sua liderança considera mais viável para o momento?</h3>
+                        <div class="options-list">
+                            <div class="option-item" onclick="selectOption(this, 3, 'palestras')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Um evento pontual e dinâmico (palestra de 1 a 2 horas) para impactar e alinhar todo mundo de uma vez só.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 3, 'coaching')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Sessões recorrentes e de longo prazo focadas em indivíduos específicos ou grupos bem pequenos.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 3, 'performance')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Um mapeamento técnico detalhado e imersivo com relatórios analíticos de processos internos.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 3, 'comercial')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Módulos de workshops práticos com foco exclusivo no time de vendas e resultados comerciais.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 3, 'lideranca')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Imersão de liderança com avaliações de comportamento estratégico e dinâmicas de gestão.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 3, 'personalizado')">
+                                <input type="radio" name="q3" class="option-radio">
+                                <span class="option-text">Um ecossistema misto inteiramente montado do zero, adaptado de forma única para nossa realidade empresarial.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-step="4">
+                        <h3>4. Se você pudesse escolher um único indicador corporativo para disparar nos próximos meses, qual seria?</h3>
+                        <div class="options-list">
+                            <div class="option-item" onclick="selectOption(this, 4, 'comercial')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Receita, ticket médio de vendas, taxa de conversão comercial e faturamento bruto.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 4, 'lideranca')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Retenção de talentos (diminuição de turnover) e maturidade corporativa da liderança.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 4, 'performance')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Eficiência de entregas, diminuição de erros operacionais e maior margem de lucro por processo.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 4, 'palestras')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Índice de felicidade interna, otimismo profissional e melhora imediata do clima e engajamento.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 4, 'coaching')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Produtividade de alto nível concentrada em gestores de alto escalão e tomadores de decisão.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 4, 'personalizado')">
+                                <input type="radio" name="q4" class="option-radio">
+                                <span class="option-text">Nossos indicadores ideais mesclam múltiplos fatores competitivos muito atrelados às regras do nosso setor.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-block" data-step="5">
+                        <h3>5. Qual frase melhor descreve a abordagem metodológica que você busca em uma consultoria externa parceira?</h3>
+                        <div class="options-list">
+                            <div class="option-item" onclick="selectOption(this, 5, 'comercial')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Foco cirúrgico em fechamento prático e desinibição comercial da ponta de vendas.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 5, 'lideranca')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Foco comportamental e metodologias avançadas de governança corporativa e gestão de equipes.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 5, 'performance')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Análise lógica baseada em dados reais e na reestruturação analítica de processos ineficientes.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 5, 'palestras')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Desenvolvimento humano focado em comportamento focado na motivação e sinergia coletiva.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 5, 'coaching')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Acompanhamento personalizado próximo, focado na melhoria contínua de metas individuais.</span>
+                            </div>
+                            <div class="option-item" onclick="selectOption(this, 5, 'personalizado')">
+                                <input type="radio" name="q5" class="option-radio">
+                                <span class="option-text">Uma junção técnica personalizada e maleável de mercado inteiramente flexível e focada na nossa realidade.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="quiz-navigation-btns">
+                        <button class="btn-quiz btn-quiz-prev" id="prevBtn" disabled onclick="navigateStep(-1)">Anterior</button>
+                        <button class="btn-quiz btn-quiz-next" id="nextBtn" onclick="navigateStep(1)">Próximo ➔</button>
+                    </div>
+                </div>
+
+                <!-- Bloco de Exibição dos Resultados -->
+                <div class="result-block" id="resultBlock">
+                    <div class="result-icon">📊</div>
+                    <h2>Diagnóstico Concluído</h2>
+                    <p style="color: #64748b; margin-bottom: 25px;">Com base nas variáveis estratégicas avaliadas, identificamos que a sua empresa necessita prioritariamente de:</p>
+                    <div class="service-title" id="resTitle">Nome do Serviço Ideal</div>
+                    <p class="service-description" id="resDesc">Descrição aprofundada do serviço com base nas alternativas selecionadas.</p>
+                    
+                    <button class="btn-result-action" onclick="window.location.href='contato.html'">Agendar Alinhamento para Este Serviço</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">Treinamento & Performance</a>
+                </h3>
+                <p>Desenvolvimento e Consultoria de Equipes de alto nível.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <a href="servicos.html">Treinamento de Equipes</a>
+                <a href="servicos.html">Desenvolvimento de Líderes</a>
+                <a href="servicos.html">Performance Organizacional</a>
+            </div>
+            <div class="footer-links">
+                <h4>Recursos</h4>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Serviço</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contato</h4>
+                <p>Rua Jacarapinima, 324<br> Parque Mandaqui, São Paulo - SP</p>
+                <p>treinamento.performance@gmail.com</p>
+                
+                <div class="footer-social-block">
+                    <div class="footer-social-flex">
+                        <a href="https://www.instagram.com/treinamento.performance/" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61589588911566" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright">© 2026 Treinamento & Performance Group. Todos os direitos reservados.</div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.addEventListener('click', (e) => {
+            if(e.target.tagName === 'A' || e.target.classList.contains('nav-links')) {
+                mobileMenuBtn.remove('active');
+                navLinks.remove('active');
+                
+                if (e.offsetX !== undefined && e.target === navLinks && e.offsetY > (navLinks.clientHeight - 100)) {
+                    window.location.href = 'contato.html';
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        let currentStep = 1;
+        const totalSteps = 5;
+        
+        const scores = {
+            comercial: 0,
+            lideranca: 0,
+            performance: 0,
+            palestras: 0,
+            coaching: 0,
+            personalizado: 0
+        };
+
+        const userSelections = {};
+
+        function selectOption(element, step, category) {
+            const block = document.querySelector(`.question-block[data-step="${step}"]`);
+            block.querySelectorAll('.option-item').forEach(item => item.classList.remove('selected'));
+            
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+
+            userSelections[step] = category;
+        }
+
+        function navigateStep(direction) {
+            if (direction === 1 && !userSelections[currentStep]) {
+                alert("Por favor, selecione uma opção estratégica antes de avançar.");
+                return;
+            }
+
+            document.querySelector(`.question-block[data-step="${currentStep}"]`).classList.remove('active');
+            
+            currentStep += direction;
+
+            if (currentStep > totalSteps) {
+                calculateResult();
+                return;
+            }
+
+            document.querySelector(`.question-block[data-step="${currentStep}"]`).classList.add('active');
+
+            const percent = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressStepText').innerText = `Pergunta ${currentStep} de ${totalSteps}`;
+            document.getElementById('progressPercent').innerText = `${percent}% Concluído`;
+
+            document.getElementById('prevBtn').disabled = (currentStep === 1);
+            
+            if (currentStep === totalSteps) {
+                document.getElementById('nextBtn').innerText = "Ver Resultado Final 📊";
+            } else {
+                document.getElementById('nextBtn').innerText = "Próximo ➔";
+            }
+        }
+
+        function calculateResult() {
+            for (let key in scores) scores[key] = 0;
+
+            for (let step in userSelections) {
+                const cat = userSelections[step];
+                if (scores[cat] !== undefined) {
+                    scores[cat]++;
+                }
+            }
+
+            let idealCategory = 'personalizado';
+            let maxScore = -1;
+
+            for (let cat in scores) {
+                if (scores[cat] > maxScore) {
+                    maxScore = scores[cat];
+                    idealCategory = cat;
+                }
+            }
+
+            const servicesData = {
+                comercial: {
+                    title: "Treinamento de Equipes Comerciais",
+                    desc: "Capacitação de profissionais para aprimorar técnicas de vendas, negociação, atendimento ao cliente e alcance de metas, com foco em resultados práticos e aumento de desempenho."
+                },
+                lideranca: {
+                    title: "Desenvolvimento de Líderes e Gestores",
+                    desc: "Treinamentos direcionados a líderes e supervisores para fortalecer competências essenciais como gestão de pessoas, tomada de decisão assertiva, comunicação estratégica e liderança corporativa de alta performance."
+                },
+                performance: {
+                    title: "Consultoria em Performance Organizacional",
+                    desc: "Análise profunda de processos internos e identificação de oportunidades estratégicas de melhoria operacional para aumentar drasticamente a produtividade, engajamento e eficiência de todas as equipes."
+                },
+                palestras: {
+                    title: "Palestras Motivacionais e Corporativas",
+                    desc: "Encontros imersivos de alto impacto voltados ao desenvolvimento comportamental de equipes, motivação profissional permanente, fortalecimento das rotinas do trabalho em grupo e consolidação da cultura organizacional."
+                },
+                coaching: {
+                    title: "Programas de Coaching e Acompanhamento Profissional",
+                    desc: "Acompanhamento individualizado ou em grupo focado no desenvolvimento de competências técnicas ou comportamentais muito específicas, definição de metas de carreira e melhoria contínua do desempenho profissional."
+                },
+                personalizado: {
+                    title: "Treinamentos Personalizados para Empresas",
+                    desc: "Soluções adaptadas integralmente conforme as reais necessidades de cada cliente, avaliando com precisão o segmento de mercado que você atua, o perfil atual das equipes e os objetivos estratégicos da organização."
+                }
+            };
+
+            document.getElementById('resTitle').innerText = servicesData[idealCategory].title;
+            document.getElementById('resDesc').innerText = servicesData[idealCategory].desc;
+
+            document.getElementById('questionsForm').style.display = 'none';
+            document.getElementById('quizProgress').style.display = 'none';
+            document.getElementById('resultBlock').style.display = 'block';
+            document.querySelector('.quiz-hero h1').innerText = "Seu Diagnóstico Estratégico";
+        }
+    </script>
+</body>
+</html>

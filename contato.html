@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Treinamento & Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .contact-hero {
+            padding: 180px 0 60px;
+            background-color: var(--white);
+        }
+
+        .contact-hero span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .contact-hero .intro-text {
+            max-width: 800px;
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .contact-content-section {
+            padding: 0 0 100px;
+            background-color: var(--white);
+        }
+
+        .contact-main-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .contact-main-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+
+        .contact-form-block {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.02);
+        }
+
+        .contact-form-group {
+            margin-bottom: 25px;
+        }
+
+        .contact-form-group label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .contact-field {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--primary-blue);
+            background-color: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .contact-field:focus {
+            outline: none;
+            border-color: var(--gold);
+            background-color: var(--white);
+            box-shadow: 0 0 0 3px rgba(251, 192, 45, 0.15);
+        }
+
+        textarea.contact-field {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .btn-send-message {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-send-message:hover {
+            background-color: var(--gold);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        .contact-info-block h2 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .contact-info-block p {
+            color: #555;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .corporate-channels-list {
+            list-style: none;
+        }
+
+        .channel-item-box {
+            margin-bottom: 35px;
+        }
+
+        .channel-item-box h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .channel-item-box p {
+            font-size: 1.05rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        .channel-whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #25D366;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-top: 5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .channel-whatsapp-link:hover {
+            opacity: 0.8;
+        }
+
+        .channel-whatsapp-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .map-wrapper {
+            margin-top: 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .map-wrapper iframe {
+            display: block;
+            width: 100%;
+            height: 220px;
+            border: 0;
+        }
+
+        .social-media-container {
+            margin-top: 20px;
+        }
+
+        .social-media-container h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .social-links-flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            color: var(--primary-blue);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-icon-btn:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-social-flex {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .footer-social-link {
+            color: #aaa;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-social-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .footer-social-link:hover {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+            padding-left: 0 !important;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 0;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: #0f172a;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px 40px;
+                gap: 25px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                transition: right 0.4s ease-in-out;
+                z-index: 1000;
+                list-style: none;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                color: #ffffff !important;
+            }
+
+            .btn-cta-nav {
+                display: none;
+            }
+            
+            .btn-mobile-nav-cta {
+                display: block;
+                width: 100%;
+                text-align: center;
+                background-color: #fbc02d;
+                color: #0f172a;
+                padding: 14px;
+                border-radius: 4px;
+                font-weight: 700;
+                font-size: 0.95rem;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-top: 20px;
+                border: none;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- NAVBAR -->
+    <nav class="navbar"
+        style="background: var(--primary-blue); border-bottom: 1px solid #1e293b; position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: #ffffff;">Treinamento & Performance</a>
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="servicos.html" class="nav-item">Serviços</a></li>
+            <li><a href="sobre.html" class="nav-item">Nossa História</a></li>
+            <li><a href="diagnostico.html" class="nav-item">Diagnóstico</a></li>
+            <li><a href="contato.html" class="nav-item" style="font-weight: 700;">Contato</a></li>
+            <li class="btn-cta-nav-container"><a href="contato.html" class="btn-mobile-nav-cta" style="display: none;">Solicitar Consultoria</a></li>
+        </ul>
+        
+        <button class="btn-cta-nav"
+            onclick="document.getElementById('formulario-contato').scrollIntoView({behavior: 'smooth'})">Solicitar
+            Consultoria</button>
+            
+        <button class="menu-toggle" id="mobileMenuBtn" aria-label="Abrir menu de navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <header class="contact-hero">
+        <div class="container">
+            <span>Conecte-se Conosco</span>
+            <h1>Iniciar uma Discussão Estratégica</h1>
+            <p class="intro-text">Estamos prontos para ajudar sua organização a atingir o próximo nível de performance.
+                Entre em contato por meio dos canais diretos ou envie uma mensagem detalhada usando o formulário
+                operacional abaixo.</p>
+        </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <section class="contact-content-section">
+        <div class="container">
+            <div class="contact-main-grid reveal">
+
+                <div id="formulario-contato" class="contact-form-block">
+                    <form action="https://formspree.io/f/xqejvewv" method="POST" id="meu-formulario">
+                        
+                        <div class="contact-form-group">
+                            <label for="full_name">Nome Completo</label>
+                            <input type="text" id="full_name" name="Nome" class="contact-field"
+                                placeholder="Ex: José Silva" required>
+                        </div>
+
+                        <div class="contact-form-group">
+                            <label for="corporate_email">E-mail Corporativo</label>
+                            <input type="email" id="corporate_email" name="Email" class="contact-field"
+                                placeholder="Ex: nome@empresa.com" required>
+                        </div>
+
+                        <div class="contact-form-group">
+                            <label for="phone_number">Telefone / Celular</label>
+                            <input type="tel" id="phone_number" name="Telefone" class="contact-field"
+                                placeholder="Ex: (11) 99999-9999" required>
+                        </div>
+
+                        <div class="contact-form-group">
+                            <label for="form_subject">Assunto Geral</label>
+                            <input type="text" id="form_subject" name="Assunto" class="contact-field"
+                                placeholder="Ex: Parceria Estratégica ou Treinamento" required>
+                        </div>
+
+                        <div class="contact-form-group">
+                            <label for="corporate_message">Mensagem ou Escopo do Projeto</label>
+                            <textarea id="corporate_message" name="Mensagem" class="contact-field"
+                                placeholder="Descreva brevemente as necessidades e os desafios da sua empresa..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-send-message">Enviar Mensagem</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-block">
+                    <h2>Nossos Canais Diretos</h2>
+                    <p>Se você prefere um atendimento imediato ou deseja agendar uma visita, use as informações abaixo
+                        para falar diretamente com o nosso time.</p>
+
+                    <ul class="corporate-channels-list">
+                        <li class="channel-item-box">
+                            <h4>Endereço do Escritório</h4>
+                            <p>Rua Jacarapinima, 324</p>
+                            <p>Parque Mandaqui, São Paulo - SP</p>
+
+                            <div class="map-wrapper">
+                                <iframe
+                                    src="https://maps.google.com/maps?q=Rua%20Jacarapinima,%20324%20Parque%20Mandaqui&t=&z=15&ie=UTF-8&iwloc=&output=embed"
+                                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </li>
+                        <li class="channel-item-box">
+                            <h4>Consultas Gerais</h4>
+                            <p>treinamentoeperfomance@gmail.com</p>
+                            <p>+55 (11) 95648-9384</p>
+                            <a href="https://wa.me/5511956489384" target="_blank" rel="noopener noreferrer" class="channel-whatsapp-link">
+                                <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.453L0 24zm6.59-2.754c1.655.982 3.511 1.5 5.409 1.5 5.487 0 9.954-4.466 9.957-9.957.002-2.661-1.026-5.163-2.897-7.037-1.871-1.874-4.364-2.903-7.026-2.904-5.49 0-9.957 4.467-9.96 9.958-.001 1.986.518 3.926 1.508 5.642l-.992 3.626 3.714-.974zm12.016-7.142c-.313-.156-1.854-.915-2.131-1.016-.277-.1-.479-.151-.68.15-.201.3-.778 1.016-.954 1.217-.176.201-.353.226-.666.07-1.84-.918-3.045-1.637-4.258-3.715-.318-.547.318-.508.911-1.697.101-.201.051-.377-.026-.527-.075-.15-.68-1.638-.931-2.24-.244-.587-.492-.508-.68-.517-.174-.009-.374-.011-.574-.011-.2 0-.527.075-.803.377-.276.301-1.054 1.029-1.054 2.509 0 1.48 1.079 2.912 1.229 3.112.151.202 2.125 3.245 5.147 4.549.719.311 1.281.496 1.719.636.722.229 1.378.197 1.898.12.579-.087 1.854-.759 2.116-1.456.261-.697.261-1.294.184-1.42-.077-.126-.277-.201-.59-.356z"/></svg>
+                                Chamar no WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="social-media-container">
+                        <h4>Siga Nossas Redes</h4>
+                        <div class="social-links-flex">
+                            <a href="https://www.instagram.com/treinamento.performance/" target="_blank"
+                                rel="noopener noreferrer" class="social-icon-btn" title="Instagram">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                                </svg>
+                            </a>
+                            <a href="https://www.facebook.com/profile.php?id=61589588911566" target="_blank"
+                                rel="noopener noreferrer" class="social-icon-btn" title="Facebook">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">Treinamento & Performance</a>
+                </h3>
+                <p>Desenvolvimento e Consultoria de Equipes de alto nível.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <a href="servicos.html">Treinamento de Equipes</a>
+                <a href="servicos.html">Desenvolvimento de Líderes</a>
+                <a href="servicos.html">Performance Organizacional</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contato</h4>
+                <p>Rua Jacarapinima, 324<br> Parque Mandaqui, São Paulo - SP</p>
+                <p>treinamentoeperfomance@gmail.com</p>
+
+                <div class="footer-social-flex">
+                    <a href="https://www.instagram.com/treinamento.performance/" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" title="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61589588911566" target="_blank"
+                        rel="noopener noreferrer" class="footer-social-link" title="Facebook">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright">© 2026 Treinamento & Performance Group. Todos os direitos reservados.</div>
+    </footer>
+
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        const formulario = document.getElementById("meu-formulario");
+        
+        formulario.addEventListener("submit", function(event) {
+            event.preventDefault(); 
+            
+            const dados = new FormData(formulario);
+            const botao = formulario.querySelector(".btn-send-message");
+            
+            botao.disabled = true;
+            botao.innerText = "Enviando...";
+
+            fetch(formulario.action, {
+                method: formulario.method,
+                body: dados,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('Sua mensagem de contato foi enviada com sucesso ao nosso time estratégico!');
+                    formulario.reset(); 
+                } else {
+                    alert('Ops! Ocorreu um problem no servidor do formulário. Tente novamente mais tarde.');
+                }
+            }).catch(error => {
+                alert('Erro de conexão. Certifique-se de que está conectado à internet.');
+            }).finally(() => {
+                botao.disabled = false;
+                botao.innerText = "Enviar Mensagem";
+            });
+        });
+    </script>
+</body>
+
+</html>

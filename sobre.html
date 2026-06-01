@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossa História | Treinamento & Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-hero {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 160px 0 100px;
+        }
+
+        .about-hero-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-hero-text {
+            flex: 1.2;
+            min-width: 320px;
+        }
+
+        .about-hero-text h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-hero-text p {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .about-hero-image {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .about-hero-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .history-section {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .history-wrapper {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .history-title-block {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .history-title-block h2 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary-blue);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .history-title-block h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--gold);
+        }
+
+        .history-text-block {
+            flex: 2.5;
+            min-width: 320px;
+            color: #444;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .history-text-block p {
+            margin-bottom: 25px;
+        }
+
+        .mv-section {
+            padding: 0 0 100px;
+            background-color: var(--white);
+        }
+
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .mv-grid { grid-template-columns: 1fr; }
+        }
+
+        .mv-box h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .mv-box p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .pilares-section {
+            background-color: #f8fafc;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .pilares-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .pilares-section .subtitle {
+            color: #666;
+            margin-bottom: 60px;
+            font-size: 1rem;
+        }
+
+        .pilares-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .pilar-card {
+            background: var(--white);
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            transition: var(--transition);
+        }
+
+        .pilar-card:hover {
+            box-shadow: 0 15px 30px rgba(10, 25, 47, 0.05);
+            border-color: var(--gold);
+        }
+
+        .pilar-icon-neutral {
+            width: 12px;
+            height: 12px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            margin-bottom: 25px;
+            position: relative;
+            display: block;
+        }
+
+        .pilar-icon-neutral::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 22px;
+            height: 22px;
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .pilar-card h3 {
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .pilar-card p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .founder-section {
+            padding: 120px 0;
+            background-color: var(--white);
+        }
+
+        .founder-wrapper {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .founder-image, .founder-text {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .founder-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .founder-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .founder-text .subtitle {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .founder-text .bio {
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .founder-text .quote {
+            font-style: italic;
+            color: #666;
+            border-left: 2px solid var(--gold);
+            padding-left: 20px;
+            font-size: 0.95rem;
+        }
+
+        .legacy-cta {
+            background-color: #e2e8f0;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .legacy-cta h2 {
+            font-size: 2.3rem;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+        }
+
+        .legacy-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-flex {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .footer-social-link {
+            color: #aaa;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-social-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .footer-social-link:hover {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+            padding-left: 0 !important;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 0;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: #0f172a;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px 40px;
+                gap: 25px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                transition: right 0.4s ease-in-out;
+                z-index: 1000;
+                list-style: none;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                color: #ffffff !important;
+            }
+
+            .btn-cta-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- MENU -->
+    <nav class="navbar" style="background: var(--primary-blue); border-bottom: 1px solid #1e293b; position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: #ffffff;">Treinamento & Performance</a>
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="servicos.html" class="nav-item" style="color: var(--white);">Serviços</a></li>
+            <li><a href="sobre.html" class="nav-item" style="color: var(--white); font-weight: 700;">Nossa História</a></li>
+            <li><a href="diagnostico.html" class="nav-item" style="color: var(--white);">Diagnóstico</a></li>
+            <li><a href="contato.html" class="nav-item" style="color: var(--white);">Contato</a></li>
+        </ul>
+        
+        <button class="btn-cta-nav" style="background: transparent; border: 1px solid white; color: white;" onclick="window.location.href='contato.html'">Solicitar Consultoria</button>
+        
+        <button class="menu-toggle" id="mobileMenuBtn" aria-label="Abrir menu de navegação">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <header class="about-hero">
+        <div class="container about-hero-wrapper">
+            <div class="about-hero-text">
+                <h1>Arquitetura da Excelência em Treinamento.</h1>
+                <p>"Transformando o potencial humano em alta performance organizacional através de experiência real de mercado."</p>
+            </div>
+            <div class="about-hero-image">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Ambiente corporativo de excelência">
+            </div>
+        </div>
+    </header>
+
+    <!-- HISTÓRIA -->
+    <section class="history-section">
+        <div class="container history-wrapper reveal">
+            <div class="history-title-block">
+                <h2>Nossa História</h2>
+            </div>
+            <div class="history-text-block">
+                <p>A Treinamento & Performance nasceu da união entre a vasta experiência prática de mercado e uma visão estratégica de desenvolvimento humano. Identificamos que o sucesso duradouro das empresas não reside apenas em processos, mas na capacitação contínua das pessoas que os operam.</p>
+                <p>Ao longo dos anos, consolidamos uma metodologia que integra vivência em grandes multinacionais com as mais modernas ferramentas de gestão e coaching, criando um ecossistema de aprendizado focado em resultados tangíveis e crescimento sustentável.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSÃO E VISÃO -->
+    <section class="mv-section">
+        <div class="container mv-grid reveal">
+            <div class="mv-box">
+                <h3>Nossa Missão</h3>
+                <p>Desenvolver pessoas e equipes para alcançarem resultados de excelência, por meio de treinamentos práticos, cursos inovadores e metodologias que transformam o potencial humano em alta performance organizacional.</p>
+            </div>
+            <div class="mv-box">
+                <h3>Nossa Visão</h3>
+                <p>Ser referência nacional em formação e desenvolvimento de equipes de alta performance, reconhecida pela capacidade de impulsionar o crescimento profissional, a produtividade e a cultura de resultados sustentáveis nas empresas parceiras.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PILARES -->
+    <section class="pilares-section">
+        <div class="container">
+            <h2 class="reveal">Os Pilares da Performance</h2>
+            <p class="subtitle reveal">Valores que sustentam nossa metodologia e entrega de resultados.</p>
+            
+            <div class="pilares-grid">
+                
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Desenvolvimento na Prática</h3>
+                    <p>Atuar diretamente no ambiente de trabalho, observando e aprimorando o desempenho real dos profissionais.</p>
+                </div>
+
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Acompanhamento Personalizado</h3>
+                    <p>Aplicar metodologias de coaching para identificar pontos fortes e oportunidades de melhoria individuais e coletivas.</p>
+                </div>
+
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Excelência Operacional</h3>
+                    <p>Garantir treinamentos de alta qualidade, alinhados às metas estratégicas e às demandas específicas de cada cliente.</p>
+                </div>
+
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Foco em Resultados Mensuráveis</h3>
+                    <p>Conectar todas as ações para o alcance de ganhos concretos de produtividade, performance e engajamento.</p>
+                </div>
+
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Relação de Confiança</h3>
+                    <p>Construir vínculos sólidos e transparentes entre consultores, gestores e equipes, baseados em respeito e ética profissional.</p>
+                </div>
+
+                <div class="pilar-card reveal">
+                    <div class="pilar-icon-neutral"></div>
+                    <h3>Evolução Contínua</h3>
+                    <p>Estimular o aprendizado permanente e o aprimoramento constante das competências comportamentais e técnicas.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIO FUNDADOR -->
+    <section class="founder-section">
+        <div class="container founder-wrapper reveal">
+            <div class="founder-image">
+                <img src="fotofundador.png" alt="Sócio Fundador">
+            </div>
+            <div class="founder-text">
+                <h2>Presidente Fundador</h2>
+                <span class="subtitle">Especialista em Liderança e Performance</span>
+                <p class="bio">Profissional com sólida experiência em gestão comercial e liderança estratégica em multinacionais como Coca-Cola, Ambev, Itaú e Itambé. Atualmente conduz a Treinamento & Performance com foco em crescimento sustentável e excelência operacional.</p>
+                <p class="quote">"Liderando a transformação de equipes através de uma abordagem baseada em vivência real de mercado e rigor metodológico."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="legacy-cta reveal">
+        <div class="container">
+            <h2>Pronto para Definir seu Legado?</h2>
+            <div class="legacy-btns">
+                <button class="btn-primary" style="background: var(--primary-blue); color: var(--white);" onclick="window.location.href='contato.html'">Agende uma Consultoria</button>
+                <button class="btn-secondary" style="border-color: var(--primary-blue); color: var(--primary-blue);" onclick="window.location.href='servicos.html'">Conheça Nossos Serviços</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">Treinamento & Performance</a>
+                </h3>
+                <p>Desenvolvimento e Consultoria de Equipes de alto nível.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <a href="servicos.html">Treinamento de Equipes</a>
+                <a href="servicos.html">Desenvolvimento de Líderes</a>
+                <a href="servicos.html">Performance Organizacional</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contato</h4>
+                <p>Rua Jacarapinima, 324<br> Parque Mandaqui, São Paulo - SP</p>
+                <p>treinamento.performance@gmail.com</p>
+                
+                <div class="footer-social-flex">
+                    <a href="https://www.instagram.com/treinamento.performance/" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=61589588911566" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">© 2026 Treinamento & Performance Group. Todos os direitos reservados.</div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+    </script>
+</body>
+</html>
