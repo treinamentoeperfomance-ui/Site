@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços | Treinamento & Performance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .services-hero {
+            padding: 180px 0 60px;
+            background-color: var(--white);
+        }
+
+        .services-hero span {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .services-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .services-hero .intro-text {
+            max-width: 800px;
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .solutions-showcase {
+            padding: 0 0 100px;
+            background-color: var(--white);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .saiba-mais-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-blue);
+            background: none;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 0;
+            transition: var(--transition);
+        }
+
+        .saiba-mais-btn:hover {
+            color: var(--gold);
+            transform: translateX(5px);
+        }
+
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 0;
+        }
+
+        .card-details p {
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #555;
+            border-left: 3px solid var(--gold);
+            line-height: 1.6;
+        }
+
+        .card-details.open {
+            margin-top: 15px;
+        }
+
+        .rigor-section {
+            background-color: #f0f2f5;
+            padding: 100px 0;
+        }
+
+        .rigor-wrapper {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .rigor-image, .rigor-text {
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .rigor-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .rigor-text h2 {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+
+        .rigor-text p {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .bullets-list {
+            list-style: none;
+        }
+
+        .bullets-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+        }
+
+        .bullets-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background-color: var(--gold);
+            border-radius: 50%;
+        }
+
+        .bullets-list li::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            width: 5px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .strategy-cta {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .strategy-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .strategy-cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.85;
+            font-size: 1.1rem;
+        }
+
+        .strategy-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-social-block {
+            margin-top: 15px;
+        }
+
+        .footer-social-flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-link {
+            color: #aaa;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .footer-social-link svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .footer-social-link:hover {
+            color: var(--white) !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 0;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-toggle.active .bar:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: #0f172a;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px 40px;
+                gap: 25px;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+                transition: right 0.4s ease-in-out;
+                z-index: 1000;
+                list-style: none;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                color: #ffffff !important;
+            }
+
+            .btn-cta-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- MENU -->
+    <nav class="navbar" style="background: var(--primary-blue); border-bottom: 1px solid #1e293b; position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="logo">
+            <a href="index.html" style="text-decoration: none; color: #ffffff;">Treinamento & Performance</a>
+        </div>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="servicos.html" class="nav-item" style="color: var(--white); font-weight: 700;">Serviços</a></li>
+            <li><a href="sobre.html" class="nav-item" style="color: var(--white);">Nossa História</a></li>
+            <li><a href="diagnostico.html" class="nav-item" style="color: var(--white);">Diagnóstico</a></li>
+            <li><a href="contato.html" class="nav-item" style="color: var(--white);">Contato</a></li>
+        </ul>
+        
+        <button class="btn-cta-nav" style="background: transparent; border: 1px solid white; color: white;" onclick="window.location.href='contato.html'">Solicitar Consultoria</button>
+        
+        <button class="menu-toggle" id="mobileMenuBtn" aria-label="Abrir menu de navegação">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <header class="services-hero">
+        <div class="container">
+            <span>Serviços Profissionais</span>
+            <h1>Nossas Soluções Especializadas</h1>
+            <p class="intro-text">Oferecemos um conjunto abrangente de serviços de assessoria projetados para navegar pelas complexidades dos mercados globais. Nossa abordagem combina rigor intelectual com execução prática para entregar valor sustentável.</p>
+        </div>
+    </header>
+
+    <!-- CARDS -->
+    <section class="solutions-showcase">
+        <div class="container">
+            <div class="showcase-grid">
+                
+                <div class="card reveal">
+                    <h3>Treinamento de Equipes Comerciais</h3>
+                    <p>Capacitação de profissionais para aprimorar técnicas de vendas, negociação, atendimento ao cliente e alcance de metas.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Focamos em resultados práticos e aumento de desempenho através de simulações reais e metodologias ativas aplicadas diretamente ao funil de vendas corporativo da sua organização.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <h3>Desenvolvimento de Líderes e Gestores</h3>
+                    <p>Treinamentos direcionados a líderes e supervisores para fortalecer a liderança de alta performance.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Buscamos consolidar e aperfeiçoar competências fundamentais como gestão de pessoas, tomada de decisão assertiva sob cenários complexos e comunicação altamente estratégica.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <h3>Consultoria em Performance Organizacional</h3>
+                    <p>Análise de processos internos e identificação de oportunidades claras de melhoria contínua.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Nossos diagnósticos operacionais são desenhados sob medida para alavancar a produtividade, otimizar fluxos de trabalho internos, elevar o engajamento e a eficiência geral das equipes.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <h3>Palestras Motivacionais e Corporativas</h3>
+                    <p>Encontros voltados ao desenvolvimento comportamental e à motivação profissional no ecossistema empresarial.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Eventos dinâmicos e de alto impacto focados em aprimorar o trabalho em equipe, inspirar atitudes de excelência e promover o fortalecimento contínuo da cultura organizacional.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <h3>Programas de Coaching e Acompanhamento Profissional</h3>
+                    <p>Acompanhamento individualizado ou em grupo estruturado para o desenvolvimento de competências específicas.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Suporte focado na definição clara de metas, superação de gargalos de carreira, refinamento de soft skills e na busca incessante pela melhoria contínua do desempenho profissional.</p>
+                    </div>
+                </div>
+
+                <div class="card reveal">
+                    <h3>Treinamentos Personalizados para Empresas</h3>
+                    <p>Soluções adaptadas integralmente conforme a necessidade, demandas e contexto operacional de cada parceiro.</p>
+                    <button class="saiba-mais-btn">Saiba Mais ➔</button>
+                    <div class="card-details">
+                        <p>Projetos customizados considerando detalhadamente o segmento de mercado, o perfil atual da equipe de colaboradores e os objetivos estratégicos da organização.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAL -->
+    <section class="rigor-section">
+        <div class="container">
+            <div class="rigor-wrapper reveal">
+                <div class="rigor-image">
+                    <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=800&q=80" alt="Reunião executiva de alta performance">
+                </div>
+                <div class="rigor-text">
+                    <h2>Rigor Intelectual Encontra Resultados Práticos</h2>
+                    <p><strong>Nosso Diferencial:</strong> Unimos profundo conhecimento técnico, ampla experiência prática de mercado e metodologias aplicadas à realidade empresarial de cada setor, proporcionando resultados concretos, mensuráveis e altamente sustentáveis para o seu negócio.</p>
+                    <ul class="bullets-list">
+                        <li>Estruturas de decisão baseadas em evidências</li>
+                        <li>Eliminação de silos de especialização funcional</li>
+                        <li>Monitoramento contínuo de desempenho</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="strategy-cta reveal">
+        <div class="container">
+            <h2>Pronto para Elevar sua Estratégia?</h2>
+            <p>Conecte-se com o nosso time para discutir os desafios da sua organização e explorar como nossos serviços de consultoria profissional podem gerar um impacto mensurável.</p>
+            <div class="strategy-btns">
+                <button class="btn-primary" style="background: #fbc02d; color: #000;" onclick="window.location.href='contato.html'">Agendar uma Chamada de Estratégia</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <h3>
+                    <a href="index.html" style="text-decoration: none; color: inherit;">Treinamento & Performance</a>
+                </h3>
+                <p>Desenvolvimento e Consultoria de Equipes de alto nível.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <a href="servicos.html">Treinamento de Equipes</a>
+                <a href="servicos.html">Desenvolvimento de Líderes</a>
+                <a href="servicos.html">Performance Organizacional</a>
+            </div>
+            <div class="footer-links">
+                <h4>Contato</h4>
+                <p style="color: #aaa; margin-bottom: 8px;">Rua Jacarapinima, 324<br> Parque Mandaqui, São Paulo - SP</p>
+                <p style="color: #aaa; margin-bottom: 15px;">treinamentoeperfomance@gmail.com</p>
+                
+                <div class="footer-social-block">
+                    <div class="footer-social-flex">
+                        <a href="https://www.instagram.com/treinamento.performance/" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61589588911566" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Facebook">
+                            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">© 2026 Treinamento & Performance Group. Todos os direitos reservados.</div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+
+        function reveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        document.querySelectorAll('.saiba-mais-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const detailsPanel = button.nextElementSibling;
+                if (detailsPanel.classList.contains('open')) {
+                    detailsPanel.classList.remove('open');
+                    detailsPanel.style.maxHeight = '0px';
+                } else {
+                    detailsPanel.classList.add('open');
+                    detailsPanel.style.maxHeight = detailsPanel.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
